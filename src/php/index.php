@@ -1,3 +1,7 @@
+<?php
+require('database.php');
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     
@@ -28,8 +32,8 @@
         </div>
         <nav>
             <h2>Zone pour le menu</h2>
-            <a href="index.html">Accueil</a>
-            <a href="addTeacher.html">Ajouter un enseignant</a>
+            <a href="index.php">Accueil</a>
+            <a href="addTeacher.php">Ajouter un enseignant</a>
         </nav>
     </header>
 
@@ -50,13 +54,13 @@
                         <td>AGT</td>
                         <td class="containerOptions">
                             <a href="#">
-                                <img height="20em" src="./img/edit.png" alt="edit">
+                                <img height="20em" src="../img/edit.png" alt="edit">
                             </a>
                             <a href="javascript:confirmDelete()">
-                                <img height="20em" src="./img/delete.png" alt="delete">
+                                <img height="20em" src="../img/delete.png" alt="delete">
                             </a>
                             <a href="detailTeacher.html">
-                                <img height="20em" src="./img/detail.png" alt="detail">
+                                <img height="20em" src="../img/detail.png" alt="detail">
                             </a>
                         </td>
                     </tr>
@@ -65,13 +69,13 @@
                         <td>AMG</td>
                         <td class="containerOptions">
                             <a href="#">
-                                <img height="20em" src="./img/edit.png" alt="edit">
+                                <img height="20em" src="../img/edit.png" alt="edit">
                             </a>
                             <a href="javascript:confirmDelete()">
-                                <img height="20em" src="./img/delete.png" alt="delete">
+                                <img height="20em" src="../img/delete.png" alt="delete">
                             </a>
                             <a href="#">
-                                <img height="20em" src="./img/detail.png" alt="detail">
+                                <img height="20em" src="../img/detail.png" alt="detail">
                             </a>
                         </td>
                     </tr>
@@ -80,13 +84,13 @@
                         <td>GregLeBarbar</td>
                         <td class="containerOptions">
                             <a href="#">
-                                <img height="20em" src="./img/edit.png" alt="edit">
+                                <img height="20em" src="../img/edit.png" alt="edit">
                             </a>
                             <a href="javascript:confirmDelete()">
-                                <img height="20em" src="./img/delete.png" alt="delete">
+                                <img height="20em" src="../img/delete.png" alt="delete">
                             </a>
                             <a href="#">
-                                <img height="20em" src="./img/detail.png" alt="detail">
+                                <img height="20em" src="../img/detail.png" alt="detail">
                             </a>
                         </td>
                     </tr>

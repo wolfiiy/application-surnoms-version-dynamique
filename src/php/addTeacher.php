@@ -1,6 +1,60 @@
+<?php
+require('database.php');
+
+// Check for filled forms
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $errors = array();
+
+    $gender = $_POST['genre'];
+    $firstName = $_POST['firstName'];
+    $name = $_POST['name'];
+    $nickname = $_POST['nickName'];
+    $origin = $_POST['origin'];
+    $section = $_POST['section'];
+
+    // Check for missing information
+    if (!isset($_POST['genre'])) {
+        $errors['genre'] = "Veuillez sélectionner un genre.";
+    }
+
+    if (empty($_POST['firstName'])) {
+        $errors['firstname'] = "Veuillez entrer un nom de famille.";
+    }
+
+    if (empty($_POST['name'])) {
+        $errors['name'] = "Veuillez entrer un prénom.";
+    }
+
+    if (empty($_POST['nickName'])) {
+        $errors['nickname'] = "Veuillez entrer un surnom.";
+    }
+
+    if (empty($_POST['origin'])) {
+        $errors['origin'] = "Veuillez renseigner l'origine du surnom.";
+    }
+
+    if (empty($_POST['section'])) {
+        $errors['section'] = "Veuillez sélectionner une section .";
+    }
+
+    // Stop if errors occured
+    if (count($errors) == 0) {
+        // TODO section
+        $sql = "insert into t_teacher values 
+                null, $firstName $name $gender $nickname $origin";
+        $req = $connector -> query($sql);
+
+        //$req -> bindValue('', $_POST[''], PDO::PARAM_);
+        // $sql = "insert into t_teacher values (?, ?, ?, ?, ?, ?)";
+        // $stmt = $connection -> prepare($sql);
+    } else {
+        var_dump($errors);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +64,6 @@
 </head>
 
 <body>
-
     <header>
         <div class="container-header">
             <div class="titre-header">
@@ -28,8 +81,8 @@
         </div>
         <nav>
             <h2>Zone pour le menu</h2>
-            <a href="index.html">Accueil</a>
-            <a href="addTeacher.html">Ajouter un enseignant</a>
+            <a href="index.php">Accueil</a>
+            <a href="addTeacher.php">Ajouter un enseignant</a>
         </nav>
     </header>
 
@@ -83,7 +136,5 @@
     <footer>
         <p>Copyright GCR - bulle web-db - 2022</p>
     </footer>
-
 </body>
-
 </html>

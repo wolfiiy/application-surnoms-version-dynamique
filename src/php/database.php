@@ -1,87 +1,94 @@
 <?php
-
 /**
- * 
- * TODO : à compléter
- * 
- * Auteur : 
- * Date : 
- * Description :
+ * Author: STE 
+ * Date: September 30th, 2024
  */
 
-
- class Database {
-
-
-    // Variable de classe
+/**
+ * Handles database interactions.
+ */
+class Database {
+    
+    /**
+     * Connection to the database.
+     */
     private $connector;
 
     /**
-     * TODO: à compléter
+     * Connects to the database using a PDO object.
+     * @throws PDOException if an error occured when connecting to the database.
      */
     public function __construct(){
-
-        // TODO: Se connecter via PDO et utilise la variable de classe $connector
+        try {
+            $connector = new PDO(
+                'mysql:host=localhost:3306;dbname=db_nickname;charset=utf8',
+                'root',
+                'root'
+            );
+        } catch (PDOException $e) {
+            die('Error: ' . $e -> getMessage());
+        }
     }
 
     /**
-     * TODO: à compléter
+     * Executes a simple query.
+     * @param string $query The query to execute.
      */
     private function querySimpleExecute($query){
 
-        // TODO: permet de préparer et d’exécuter une requête de type simple (sans where)
+        // TODO: permet de prï¿½parer et dï¿½exï¿½cuter une requï¿½te de type simple (sans where)
     }
 
     /**
-     * TODO: à compléter
+     * TODO: ï¿½ complï¿½ter
      */
     private function queryPrepareExecute($query, $binds){
         
-        // TODO: permet de préparer, de binder et d’exécuter une requête (select avec where ou insert, update et delete)
+        // TODO: permet de prï¿½parer, de binder et dï¿½exï¿½cuter une requï¿½te (select avec where ou insert, update et delete)
     }
 
     /**
-     * TODO: à compléter
+     * TODO: ï¿½ complï¿½ter
      */
     private function formatData($req){
 
-        // TODO: traiter les données pour les retourner par exemple en tableau associatif (avec PDO::FETCH_ASSOC)
+        // TODO: traiter les donnï¿½es pour les retourner par exemple en tableau associatif (avec PDO::FETCH_ASSOC)
     }
 
     /**
-     * TODO: à compléter
+     * TODO: ï¿½ complï¿½ter
      */
     private function unsetData($req){
 
-        // TODO: vider le jeu d’enregistrement
+        // TODO: vider le jeu dï¿½enregistrement
     }
 
     /**
-     * TODO: à compléter
+     * TODO: ï¿½ complï¿½ter
      */
     public function getAllTeachers(){
 
-        // TODO: récupère la liste de tous les enseignants de la BD
-        // TODO: avoir la requête sql
-        // TODO: appeler la méthode pour executer la requête
-        // TODO: appeler la méthode pour avoir le résultat sous forme de tableau
+        // TODO: rï¿½cupï¿½re la liste de tous les enseignants de la BD
+        // TODO: avoir la requï¿½te sql
+        // TODO: appeler la mï¿½thode pour executer la requï¿½te
+        // TODO: appeler la mï¿½thode pour avoir le rï¿½sultat sous forme de tableau
         // TODO: retour tous les enseignants
     }
 
     /**
-     * TODO: à compléter
+     * TODO: ï¿½ complï¿½ter
      */
     public function getOneTeacher($id){
 
-        // TODO: récupère la liste des informations pour 1 enseignant
-        // TODO: avoir la requête sql pour 1 enseignant (utilisation de l'id)
-        // TODO: appeler la méthode pour executer la requête
-        // TODO: appeler la méthode pour avoir le résultat sous forme de tableau
+        // TODO: rï¿½cupï¿½re la liste des informations pour 1 enseignant
+        // TODO: avoir la requï¿½te sql pour 1 enseignant (utilisation de l'id)
+        // TODO: appeler la mï¿½thode pour executer la requï¿½te
+        // TODO: appeler la mï¿½thode pour avoir le rï¿½sultat sous forme de tableau
         // TODO: retour l'enseignant
     }
 
 
-    // + tous les autres méthodes dont vous aurez besoin pour la suite (insertTeacher ... etc)
+    // + tous les autres mï¿½thodes dont vous aurez besoin pour la suite (insertTeacher ... etc)
  }
 
 
