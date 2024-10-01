@@ -10,22 +10,50 @@ include('writer.php');
  * Handles database interactions.
  */
 class Database {
-    
+
     /**
      * Connection to the database.
      */
     private $connector;
 
     /**
-     * Connects to the database using a PDO object.
-     * @throws PDOException if an error occured when connecting to the database.
+     * Creates a new Database instance.
+     * 
+     * Establishes a connection to a database using the provided configuration.
+     * The configuration file is located at the root of the application and is
+     * named 'config.json'. It should contain the following keys:
+     * - DBMS: the database management system.
+     * - DB_HOST: the hostname or the IP address of the database server.
+     * - DB_NAME: the name of the database to use.
+     * - DB_CHARSET: the character set to use.
+     * - DB_USER: the username for database authentification.
+     * - DB_PASSWORD: the password for database authentification. 
+     * 
+     * @throws Exception If there is an error reading the config file.
+     * @throws PDOException If the connection to the database fails.
      */
     public function __construct(){
         try {
+            // Attempt to read the config file
+            $configFile = file_get_contents('../../config.json');
+            $conf = json_decode($configFile, true);
+
+            // Create the DSN
+            $dsn = $conf['DBMS'] . ":";
+            $dsn .= "host=" . $conf['DB_HOST'] . ";";
+            $dsn .= "dbname=" . $conf['DB_NAME'] . ";";
+            $dsn .= "charset=" . $conf['DB_CHARSET'];
+        } catch (Exception $e) {
+            die ('An error occured while reading the config file.'
+                . $e -> getMessage());
+        }
+
+        try {
+            // Attempt to establish a connection to the database
             $this -> connector = new PDO(
-                'mysql:host=localhost:6033;dbname=db_nickname;charset=utf8',
-                'root',
-                'root'
+                $dsn,
+                $conf['DB_USER'],
+                $conf['DB_PASSWORD']
             );
         } catch (PDOException $e) {
             die('Error: ' . $e -> getMessage());
