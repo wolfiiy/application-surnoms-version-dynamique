@@ -2,6 +2,8 @@
 /**
  * Authors: GCR, STE
  * Date: October 1st, 2024
+ * Description: Index of the nickname application. Displays a table with all
+ * registered nicknames and allows for edition of said nicknames.
  */
 
 require('database.php');

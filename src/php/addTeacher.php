@@ -1,4 +1,10 @@
 <?php
+/**
+ * Authors: GCR, STE
+ * Date: October 1st, 2024
+ * Description: Allows for the addition of teachers to the nick names database.
+ */
+
 require('database.php');
 
 // Check for filled forms

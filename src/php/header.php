@@ -1,3 +1,10 @@
+<!--
+Authors: GCR, STE
+Date: October 1st, 2024
+Dexription: Header to be used throughout the nickname application. Displays the
+application's name and a navigation menu.
+-->
+
 <header>
     <div class="container-header">
         <div class="titre-header">

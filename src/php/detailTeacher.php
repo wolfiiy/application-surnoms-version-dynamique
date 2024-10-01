@@ -1,4 +1,10 @@
 <?php
+/**
+ * Authors: GCR, STE
+ * Date: October 1st, 2024
+ * Description: Detailed view of a given teacher.
+ */
+
 require('database.php');
 ?>
 
