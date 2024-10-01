@@ -4,6 +4,8 @@
  * Date: September 30th, 2024
  */
 
+include('writer.php');
+
 /**
  * Handles database interactions.
  */
@@ -20,8 +22,8 @@ class Database {
      */
     public function __construct(){
         try {
-            $connector = new PDO(
-                'mysql:host=localhost:3306;dbname=db_nickname;charset=utf8',
+            $this -> connector = new PDO(
+                'mysql:host=localhost:6033;dbname=db_nickname;charset=utf8',
                 'root',
                 'root'
             );
@@ -31,12 +33,18 @@ class Database {
     }
 
     /**
-     * Executes a simple query.
+     * Prepares and executes a simple query.
      * @param string $query The query to execute.
+     * @return PDOStatement|false an associative array containing the result 
+     * of the query, or false if it did not go through.
      */
-    private function querySimpleExecute($query){
-
-        // TODO: permet de pr�parer et d�ex�cuter une requ�te de type simple (sans where)
+    private function querySimpleExecute(string $query){
+        try {
+            return $this -> connector -> query($query);
+        } catch (PDOException $e) {
+            error_log("An error occured. " . $e -> getMessage());
+            return false;
+        }
     }
 
     /**
@@ -64,22 +72,20 @@ class Database {
     }
 
     /**
-     * TODO: � compl�ter
+     * Gets a list of all teachers registered in the database.
+     * @return string a table containing all teachers.
      */
     public function getAllTeachers(){
-
-        // TODO: r�cup�re la liste de tous les enseignants de la BD
-        // TODO: avoir la requ�te sql
-        // TODO: appeler la m�thode pour executer la requ�te
-        // TODO: appeler la m�thode pour avoir le r�sultat sous forme de tableau
-        // TODO: retour tous les enseignants
+        $sql = "select * from t_teacher";
+        $res = $this -> querySimpleExecute($sql);
+        $teachers = $res -> fetchAll(PDO::FETCH_ASSOC);
+        return Writer::writeAllTeacher($teachers);
     }
 
     /**
      * TODO: � compl�ter
      */
     public function getOneTeacher($id){
-
         // TODO: r�cup�re la liste des informations pour 1 enseignant
         // TODO: avoir la requ�te sql pour 1 enseignant (utilisation de l'id)
         // TODO: appeler la m�thode pour executer la requ�te
@@ -87,9 +93,8 @@ class Database {
         // TODO: retour l'enseignant
     }
 
-
     // + tous les autres m�thodes dont vous aurez besoin pour la suite (insertTeacher ... etc)
- }
+}
 
 
 ?>

@@ -1,10 +1,11 @@
 <?php
 require('database.php');
+
+$db = new Database();
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
-    
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +15,6 @@ require('database.php');
 </head>
 
 <body>
-
     <header>
         <div class="container-header">
             <div class="titre-header">
@@ -40,62 +40,7 @@ require('database.php');
     <div class="container">
         <h3>Liste des enseignants</h3>
         <form action="#" method="post">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Surnom</th>
-                        <th>Options</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Girardet Alain</td>
-                        <td>AGT</td>
-                        <td class="containerOptions">
-                            <a href="#">
-                                <img height="20em" src="../img/edit.png" alt="edit">
-                            </a>
-                            <a href="javascript:confirmDelete()">
-                                <img height="20em" src="../img/delete.png" alt="delete">
-                            </a>
-                            <a href="detailTeacher.html">
-                                <img height="20em" src="../img/detail.png" alt="detail">
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Mveng Antoine</td>
-                        <td>AMG</td>
-                        <td class="containerOptions">
-                            <a href="#">
-                                <img height="20em" src="../img/edit.png" alt="edit">
-                            </a>
-                            <a href="javascript:confirmDelete()">
-                                <img height="20em" src="../img/delete.png" alt="delete">
-                            </a>
-                            <a href="#">
-                                <img height="20em" src="../img/detail.png" alt="detail">
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Charmier Grégory</td>
-                        <td>GregLeBarbar</td>
-                        <td class="containerOptions">
-                            <a href="#">
-                                <img height="20em" src="../img/edit.png" alt="edit">
-                            </a>
-                            <a href="javascript:confirmDelete()">
-                                <img height="20em" src="../img/delete.png" alt="delete">
-                            </a>
-                            <a href="#">
-                                <img height="20em" src="../img/detail.png" alt="detail">
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <?php echo $db -> getAllTeachers();?>
         </form>
         <script src="js/script.js"></script>
     </div>
