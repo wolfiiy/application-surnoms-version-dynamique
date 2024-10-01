@@ -4,7 +4,6 @@ require('database.php');
 
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,28 +13,7 @@ require('database.php');
 </head>
 
 <body>
-
-    <header>
-        <div class="container-header">
-            <div class="titre-header">
-                <h1>Surnom des enseignants</h1>
-            </div>
-            <div class="login-container">
-                <form action="#" method="post">
-                    <label for="user"> </label>
-                    <input type="text" name="user" id="user" placeholder="Login">
-                    <label for="password"> </label>
-                    <input type="password" name="password" id="password" placeholder="Mot de passe">
-                    <button type="submit" class="btn btn-login">Se connecter</button>
-                </form>
-            </div>
-        </div>
-        <nav>
-            <h2>Zone pour le menu</h2>
-            <a href="index.php">Accueil</a>
-            <a href="addTeacher.php">Ajouter un enseignant</a>
-        </nav>
-    </header>
+    <?php include('header.php') ?>
 
     <div class="container">
         <div class="user-head">
