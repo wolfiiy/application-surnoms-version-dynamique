@@ -111,17 +111,32 @@ class Database {
     }
 
     /**
-     * TODO: � compl�ter
+     * Gets information on a teacher given an ID.
+     * @param int $id ID of the teacher.
+     * @return array an associative array that contains the details about the
+     * queried teacher.
      */
-    public function getOneTeacher($id){
-        // TODO: r�cup�re la liste des informations pour 1 enseignant
-        // TODO: avoir la requ�te sql pour 1 enseignant (utilisation de l'id)
-        // TODO: appeler la m�thode pour executer la requ�te
-        // TODO: appeler la m�thode pour avoir le r�sultat sous forme de tableau
-        // TODO: retour l'enseignant
+    public function getOneTeacher($id) {
+        $sql = "select * from t_teacher where idTeacher = " . $id;
+        $res = $this -> querySimpleExecute($sql);
+        $details = $res -> fetchAll(PDO::FETCH_ASSOC);
+        return $details;
     }
 
-    // + tous les autres m�thodes dont vous aurez besoin pour la suite (insertTeacher ... etc)
+    /**
+     * Gets the correct field given an ID.
+     * @param int $id ID fo the field.
+     * @return array an associative array that contains the field of study and
+     * its ID.
+     */
+    public function getSectionById($id) {
+        $sql = "select * from t_section where idSection = $id";
+        $res = $this -> querySimpleExecute($sql);
+        return $res -> fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // + tous les autres m�thodes dont vous aurez besoin pour la suite 
+    // (insertTeacher ... etc)
 }
 
 

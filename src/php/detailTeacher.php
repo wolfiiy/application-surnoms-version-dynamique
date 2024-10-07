@@ -6,6 +6,7 @@
  */
 
 require('database.php');
+$db = new Database();
 ?>
 
 <!DOCTYPE html>
@@ -21,33 +22,44 @@ require('database.php');
 <body>
     <?php include('header.php') ?>
 
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
+        $teacherDetails = $db -> getOneTeacher($_GET['id']);
+    }
+    ?>
+
     <div class="container">
         <div class="user-head">
-            <h3>Détail : Grégory Charmier
-                <img style="margin-left: 1vw;" height="20em" src="./img/male.png" alt="male symbole">
+            <h3>Détail : <?php echo $teacherDetails[0]['teaFirstname'] . " " . $teacherDetails[0]['teaName'] ?>
+                <img style="margin-left: 1vw;" height="20em" src="../img/male.png" alt="male symbole">
             </h3>
             <p>
-                Informatique
+                <?php
+                    $secId =  $teacherDetails[0]['fkSection'];
+                    $sec = $db -> getSectionById($secId)[0]['secName'];
+                    echo ucwords($sec); 
+                ?>
             </p>
             <div class="actions">
-
                 <a href="#">
-                    <img height="20em" src="./img/edit.png" alt="edit icon"></a>
+                    <img height="20em" src="../img/edit.png" alt="edit icon">
+                </a>
                 <a href="javascript:confirmDelete()">
-                    <img height="20em" src="./img/delete.png" alt="delete icon"> </a>
-
+                    <img height="20em" src="../img/delete.png" alt="delete icon"> 
+                </a>
             </div>
         </div>
+
         <div class="user-body">
             <div class="left">
-                <p>Surnom : GregLeBarbar</p>
-                <p>C'est son nom de guerrier échiquéen sur les différentes plateformes de jeu.</p>
+                <p>Surnom : <?=$teacherDetails[0]['teaNickname'];?></p>
+                <p><?=$teacherDetails[0]['teaOrigine'];?></p>
             </div>
         </div>
+
         <div class="user-footer">
             <a href="index.html">Retour à la page d'accueil</a>
         </div>
-
     </div>
 
     <footer>
@@ -55,7 +67,5 @@ require('database.php');
     </footer>
 
     <script src="js/script.js"></script>
-
 </body>
-
 </html>

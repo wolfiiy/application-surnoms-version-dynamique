@@ -29,7 +29,7 @@ class Writer {
                         <a href="javascript:confirmDelete()">
                             <img height="20em" src="../img/delete.png" alt="delete">
                         </a>
-                        <a href="#">
+                        <a href="detailTeacher.php?id={$t['idTeacher']}">
                             <img height="20em" src="../img/detail.png" alt="detail">
                         </a>
                     </td>
