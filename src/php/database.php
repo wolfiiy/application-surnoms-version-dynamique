@@ -135,8 +135,27 @@ class Database {
         return $res -> fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // + tous les autres m�thodes dont vous aurez besoin pour la suite 
-    // (insertTeacher ... etc)
+    /**
+     * Gets a list of all sections.
+     * @return array an associative array that contains all sections found in 
+     * the database.
+     */
+    public function getSectionList() {
+        return $this -> querySimpleExecute("select * from t_section") 
+                     -> fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Inserts a new teacher to the database.
+     */
+    public function insertTeacher(string $firstName, string $lastName, 
+        string $gender, string $nickname, string $origin, int $section) {
+        $sql = <<< SQL
+            insert into t_teacher (teaFirstname, teaName, teaGender, teaNickname, teaOrigine, fkSection)
+            values ({$firstName}, {$lastName}, {$gender}, {$nickname}, {$origin}, {$section});
+        SQL;
+        $this -> querySimpleExecute($sql);
+    }
 }
 
 

@@ -6,6 +6,7 @@
  */
 
 require('database.php');
+$db = new Database();
 
 // Check for filled forms
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -45,14 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Stop if errors occured
     if (count($errors) == 0) {
-        // TODO section
-        $sql = "insert into t_teacher values 
-                null, $firstName $name $gender $nickname $origin";
-        $req = $connector -> query($sql);
-
-        //$req -> bindValue('', $_POST[''], PDO::PARAM_);
-        // $sql = "insert into t_teacher values (?, ?, ?, ?, ?, ?)";
-        // $stmt = $connection -> prepare($sql);
+        $db -> insertTeacher($firstName, $name, $gender, $nickname, $origin, 
+                             $section);
     } else {
         var_dump($errors);
     }
@@ -104,8 +99,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label style="display: none" for="section"></label>
                     <select name="section" id="section">
                         <option value="">Section</option>
-                        <option value="info">Informatique</option>
-                        <option value="bois">Bois</option>
+                        <?php
+                        // Dynamically create options
+                        $sections = $db -> getSectionList();
+                        foreach ($sections as $s) {
+                            $option = "";
+                            $option .= '<option value="' . $s['idSection'] . '">';
+                            $option .= ucfirst($s['secName']);
+                            $option .= '</option>';
+                            echo $option;
+                        }
+                        ?>
                     </select>
                 </p>
                 <p>
