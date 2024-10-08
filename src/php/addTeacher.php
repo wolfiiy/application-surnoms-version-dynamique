@@ -5,53 +5,10 @@
  * Description: Allows for the addition of teachers to the nick names database.
  */
 
+require('constants.php');
 require('database.php');
+
 $db = new Database();
-
-// Check for filled forms
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $errors = array();
-
-    $gender = $_POST['genre'];
-    $firstName = $_POST['firstName'];
-    $name = $_POST['name'];
-    $nickname = $_POST['nickName'];
-    $origin = $_POST['origin'];
-    $section = $_POST['section'];
-
-    // Check for missing information
-    if (!isset($_POST['genre'])) {
-        $errors['genre'] = "Veuillez sélectionner un genre.";
-    }
-
-    if (empty($_POST['firstName'])) {
-        $errors['firstname'] = "Veuillez entrer un nom de famille.";
-    }
-
-    if (empty($_POST['name'])) {
-        $errors['name'] = "Veuillez entrer un prénom.";
-    }
-
-    if (empty($_POST['nickName'])) {
-        $errors['nickname'] = "Veuillez entrer un surnom.";
-    }
-
-    if (empty($_POST['origin'])) {
-        $errors['origin'] = "Veuillez renseigner l'origine du surnom.";
-    }
-
-    if (empty($_POST['section'])) {
-        $errors['section'] = "Veuillez sélectionner une section .";
-    }
-
-    // Stop if errors occured
-    if (count($errors) == 0) {
-        $db -> insertTeacher($firstName, $name, $gender, $nickname, $origin, 
-                             $section);
-    } else {
-        var_dump($errors);
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <div class="container">
         <div class="user-body">
-            <form action="#" method="post" id="form">
+            <form action="checkForm.php" method="post" id="form">
                 <h3>Ajout d'un enseignant</h3>
                 <p>
                     <input type="radio" id="genre1" name="genre" value="M" checked>
@@ -80,16 +37,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <label for="genre3">Autre</label>
                 </p>
                 <p>
-                    <label for="firstName">Nom :</label>
-                    <input type="text" name="firstName" id="firstName" value="">
+                    <label for="lastname">Nom :</label>
+                    <input type="text" name="lastname" id="lastname" value="">
                 </p>
                 <p>
-                    <label for="name">Prénom :</label>
-                    <input type="text" name="name" id="name" value="">
+                    <label for="firstname">Prénom :</label>
+                    <input type="text" name="firstname" id="firstname" value="">
                 </p>
                 <p>
-                    <label for="nickName">Surnom :</label>
-                    <input type="text" name="nickName" id="nickName" value="">
+                    <label for="nickname">Surnom :</label>
+                    <input type="text" name="nickname" id="nickname" value="">
                 </p>
                 <p>
                     <label for="origin">Origine :</label>

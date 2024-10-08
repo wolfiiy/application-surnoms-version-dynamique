@@ -44,5 +44,23 @@ class Writer {
 
         return $table;
     }
+
+    /**
+     * Writes an array of strings as a list.
+     */
+    static function writeAsList($array, $color) {
+        $html = "";
+        $html .= "<ul>";
+
+        foreach ($array as $str) {
+            $html .= '<li style="color:' . $color . ';">';
+            $html .= $str;
+            $html .= "</li>";
+        }
+
+        $html .= "</ul>";
+
+        echo $html;
+    }
 }
 ?>
