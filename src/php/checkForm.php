@@ -8,11 +8,13 @@
 require('constants.php');
 require('database.php');
 
+$db = new Database();
+
 // Check for filled forms
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = array();
     $gender = $_POST['genre'];
-    $firstName = $_POST['firstname'];
+    $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
     $nickname = $_POST['nickname'];
     $origin = $_POST['origin'];
@@ -45,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Stop if errors occured
     if (count($errors) == 0) {
-        $db -> insertTeacher($firstName, $name, $gender, $nickname, $origin, 
+        $db -> insertTeacher($firstname, $lastname, $gender, $nickname, $origin, 
                              $section);
     } else {
         echo <<< HTML
@@ -54,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 Une ou plusieures erreurs est / sont survenues. Cause(s):
             </p>
         HTML;
-        Writer::writeAsList($errors, "red");
+        Writer::writeAsList($errors, "orange");
     }
 }
 

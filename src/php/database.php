@@ -151,10 +151,15 @@ class Database {
     public function insertTeacher(string $firstName, string $lastName, 
         string $gender, string $nickname, string $origin, int $section) {
         $sql = <<< SQL
-            insert into t_teacher (teaFirstname, teaName, teaGender, teaNickname, teaOrigine, fkSection)
-            values ({$firstName}, {$lastName}, {$gender}, {$nickname}, {$origin}, {$section});
+            insert into t_teacher (teaFirstname, teaName, teaGender, 
+                                   teaNickname, teaOrigine, fkSection)
+            values ("{$firstName}", "{$lastName}", "{$gender}", "{$nickname}",
+                    "{$origin}", "{$section}");
         SQL;
+
         $this -> querySimpleExecute($sql);
+
+        header("Location: index.php");
     }
 }
 
