@@ -5,8 +5,25 @@
  * Description: Detailed view of a given teacher.
  */
 
+// Connection to the database
 require('database.php');
 $db = new Database();
+
+// Get the requested teacher
+if (isset($_GET['id'])) {
+    $teacher = $db -> getOneTeacher($_GET['id']);
+    $section = $db -> getSectionById($teacher['fkSection']);
+
+    // Map gender to the correct image
+    $genderImagePath = array(
+        'M' => 'male.png',
+        'F' => 'femelle.png',
+        'A' => 'autre.png'
+    );
+
+    $genderImage = $genderImagePath[$teacher['teaGender']];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -16,32 +33,22 @@ $db = new Database();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../css/style.css" rel="stylesheet">
-    <title>Version statique de l'application des surnoms</title>
+    <title>Détails de <?=$teacher['teaNickname']?></title>
 </head>
 
 <body>
-    <?php include('header.php') ?>
-
-    <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
-        $teacherDetails = $db -> getOneTeacher($_GET['id']);
-    }
-    ?>
+    <?php include('header.php')?>
 
     <div class="container">
         <div class="user-head">
-            <h3>Détail : <?php echo $teacherDetails[0]['teaFirstname'] . " " . $teacherDetails[0]['teaName'] ?>
-                <img style="margin-left: 1vw;" height="20em" src="../img/male.png" alt="male symbole">
+            <h3>Détail : <?=$teacher['teaFirstname'] . " " . $teacher['teaName'];?>
+                <img style="margin-left: 1vw;" height="20em" src="../img/<?=$genderImage?>" alt="male symbole">
             </h3>
             <p>
-                <?php
-                    $secId =  $teacherDetails[0]['fkSection'];
-                    $sec = $db -> getSectionById($secId)[0]['secName'];
-                    echo ucwords($sec); 
-                ?>
+                <?=ucwords($section['secName']);?>
             </p>
             <div class="actions">
-                <a href="#">
+                <a href="editTeacher.php?id=<?=$teacher['idTeacher']?>">
                     <img height="20em" src="../img/edit.png" alt="edit icon">
                 </a>
                 <a href="javascript:confirmDelete()">
@@ -52,8 +59,12 @@ $db = new Database();
 
         <div class="user-body">
             <div class="left">
-                <p>Surnom : <?=$teacherDetails[0]['teaNickname'];?></p>
-                <p><?=$teacherDetails[0]['teaOrigine'];?></p>
+                <p>
+                    Surnom : <?=$teacher['teaNickname'];?>
+                </p>
+                <p>
+                    <?=$teacher['teaOrigine'];?>
+                </p>
             </div>
         </div>
 

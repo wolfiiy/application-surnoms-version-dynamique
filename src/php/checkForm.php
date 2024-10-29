@@ -45,10 +45,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors['section'] = Constants::ERROR_MISSING_SECTION;
     }
 
+    $data = array(
+        "firstname" => $firstname,
+        "lastname" => $lastname,
+        "gender" => $gender,
+        "nickname" => $nickname,
+        "origin" => $origin,
+        "section" => $section
+    );
+
     // Stop if errors occured
     if (count($errors) == 0) {
-        $db -> insertTeacher($firstname, $lastname, $gender, $nickname, $origin, 
-                             $section);
+        if (isset($_GET['id'])) {
+            // If the id is set, update an existing teacher
+            $data["id"] = $_GET['id'];
+            $db -> editTeacher($data);
+        } else {
+            // If the get is empty, default to adding the teacher
+            $db -> insertTeacher($firstname, $lastname, $gender, $nickname, $origin, 
+                                 $section);
+        }
     } else {
         echo <<< HTML
             <h1>Erreur</h1>

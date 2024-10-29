@@ -119,8 +119,8 @@ class Database {
     public function getOneTeacher($id) {
         $sql = "select * from t_teacher where idTeacher = " . $id;
         $res = $this -> querySimpleExecute($sql);
-        $details = $res -> fetchAll(PDO::FETCH_ASSOC);
-        return $details;
+        $teachers = $res -> fetchAll(PDO::FETCH_ASSOC);
+        return $teachers[0];
     }
 
     /**
@@ -132,7 +132,7 @@ class Database {
     public function getSectionById($id) {
         $sql = "select * from t_section where idSection = $id";
         $res = $this -> querySimpleExecute($sql);
-        return $res -> fetchAll(PDO::FETCH_ASSOC);
+        return $res -> fetchAll(PDO::FETCH_ASSOC)[0];
     }
 
     /**
@@ -155,6 +155,44 @@ class Database {
                                    teaNickname, teaOrigine, fkSection)
             values ("{$firstName}", "{$lastName}", "{$gender}", "{$nickname}",
                     "{$origin}", "{$section}");
+        SQL;
+
+        $this -> querySimpleExecute($sql);
+
+        header("Location: index.php");
+    }
+
+    /**
+     * Updates a teacher's information.
+     * @param $data An array that contains the teacher's data.
+     */
+    public function editTeacher(array $data) {
+        $sql = <<< SQL
+            update 
+                t_teacher
+            set 
+                teaFirstname = "{$data['firstname']}",
+                teaName = "{$data['lastname']}",
+                teaGender = "{$data['gender']}",
+                teaNickname = "{$data['nickname']}",
+                teaOrigine = "{$data['origin']}",
+                fkSection = {$data['section']}
+            where 
+                idTeacher = {$data['id']};
+        SQL;
+
+        $this -> querySimpleExecute($sql);
+        echo $sql;
+        header("Location: index.php");
+    }
+
+    /**
+     * Given an ID, will remove the corresponding teacher from the database.
+     */
+    public function removeTeacher(int $id) {
+        $sql = <<< SQL
+            delete from t_teacher
+            where idTeacher = {$id};
         SQL;
 
         $this -> querySimpleExecute($sql);

@@ -26,7 +26,7 @@ $db = new Database();
 
     <div class="container">
         <div class="user-body">
-            <form action="checkForm.php" method="post" id="form">
+            <form action="checkForm.php?action=insert" method="post" id="form">
                 <h3>Ajout d'un enseignant</h3>
                 <p>
                     <input type="radio" id="genre1" name="genre" value="M" checked>
@@ -80,8 +80,6 @@ $db = new Database();
         </div>
     </div>
 
-    <footer>
-        <p>Copyright GCR - bulle web-db - 2022</p>
-    </footer>
+    <?php include('footer.php');?>
 </body>
 </html>
