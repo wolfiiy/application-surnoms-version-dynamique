@@ -147,6 +147,7 @@ class Database {
 
     /**
      * Inserts a new teacher to the database.
+     * @param $data An array that contains the teacher's data. TODO
      */
     public function insertTeacher(string $firstName, string $lastName, 
         string $gender, string $nickname, string $origin, int $section) {
@@ -163,7 +164,7 @@ class Database {
     }
 
     /**
-     * Updates a teacher's information.
+     * Updates a teacher's information and redirects the user to the home page.
      * @param $data An array that contains the teacher's data.
      */
     public function editTeacher(array $data) {
@@ -182,7 +183,6 @@ class Database {
         SQL;
 
         $this -> querySimpleExecute($sql);
-        echo $sql;
         header("Location: index.php");
     }
 
@@ -196,7 +196,6 @@ class Database {
         SQL;
 
         $this -> querySimpleExecute($sql);
-
         header("Location: index.php");
     }
 }

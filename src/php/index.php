@@ -29,7 +29,7 @@ $db = new Database();
         <form action="#" method="post">
             <?php echo $db -> getAllTeachers();?>
         </form>
-        <script src="js/script.js"></script>
+        <script src="../js/script.js"></script>
     </div>
 
     <footer>
