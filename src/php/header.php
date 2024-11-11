@@ -22,7 +22,26 @@ $isLoggedIn = isset($_SESSION['user']);
                   method="post">
                 <?php
                     if ($isLoggedIn){
-                        echo $_SESSION['user']['login'];
+                        $role = "";
+                        switch ($_SESSION['user']['privileges']) {
+                            case 0:
+                                $role = "guest";
+                                break;
+                            case 1:
+                                $role = "user";
+                                break;
+                            case 2:
+                                $role = "admin";
+                            default:
+                                $role = "unknown";
+                                break;
+                        }
+
+                        echo "<p>" 
+                            . $_SESSION['user']['login'] 
+                            . " ("
+                            . $role
+                            . ")</p>";
                     } else {
                         $form = <<< HTML
                             <label for="username"></label>
