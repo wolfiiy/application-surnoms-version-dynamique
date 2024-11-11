@@ -69,14 +69,11 @@ if (isset($_GET['id'])) {
         </div>
 
         <div class="user-footer">
-            <a href="index.html">Retour à la page d'accueil</a>
+            <a href="index.php">Retour à la page d'accueil</a>
         </div>
     </div>
 
-    <footer>
-        <p>Copyright GCR - bulle web-db - 2022</p>
-    </footer>
-
+    <?php include('footer.php');?>
     <script src="js/script.js"></script>
 </body>
 </html>

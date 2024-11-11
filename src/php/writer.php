@@ -1,9 +1,14 @@
 <?php
 class Writer {
+    /**
+     * Writes a list of all teachers found in the database. The list allows
+     * authorized users to view, edit and/or delete a teacher's details.
+     */
     static function writeAllTeacher() {
         $db = new Database();
         $teachers = $db -> getAllTeachers();
-        
+
+        // Table header
         $table = <<< HTML
             <table>
                 <thead>
@@ -16,6 +21,7 @@ class Writer {
                 <tbody>
         HTML;
 
+        // Teacher(s) rows
         foreach ($teachers as $t) {
             $table .= <<< HTML
                 <tr>
@@ -40,6 +46,7 @@ class Writer {
             HTML;
         }    
 
+        // End the table
         $table .= <<< HTML
                 </tbody>
             </table>
@@ -49,12 +56,18 @@ class Writer {
     }
 
     /**
-     * Writes an array of strings as a list.
+     * Given an array of strings and a color, writes a list on the screen.
+     * 
+     * @param array $array An array containing all strings to be written on the
+     * screen.
+     * @param $color The color in which to write the strings from the 'array'
+     * array. The color can be any valid value for the HTML 'color' attribute.
      */
     static function writeAsList($array, $color) {
         $html = "";
         $html .= "<ul>";
 
+        // Loop over the strings
         foreach ($array as $str) {
             $html .= '<li style="color:' . $color . ';">';
             $html .= $str;

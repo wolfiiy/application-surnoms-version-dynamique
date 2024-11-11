@@ -7,10 +7,15 @@
 
 require('database.php');
 
+// If the 'id' variable has been set, remove the corresponding teacher.
 if (isset($_GET['id'])) {
     removeTeacher($_GET['id']);
 }
 
+/**
+ * Removes a teacher from the database by calling the appropriate method in the
+ * database class. Once removed, redirects the user to the index.
+ */
 function removeTeacher(int $id) {
     $db = new Database();
     $db -> removeTeacher($id);

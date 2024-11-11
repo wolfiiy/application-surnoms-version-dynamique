@@ -145,52 +145,64 @@ class Database {
      * details.
      */
     public function getAllTeachers() {
-        // Executes an SQL query that requests all teachers
+        // Execute an SQL query that requests all teachers
         $sql = "select * from t_teacher";
         $res = $this -> querySimpleExecute($sql);
 
-        // Returns a formatted associative array
+        // Return a formatted associative array
         return $this -> formatData($res);
     }
 
     /**
      * Retrieves detailed information on a specific teacher, given their ID.
+     * 
      * @param int $id The unique ID of the teacher..
      * @return array An associative array that contains details about the
      * specified teacher.
      */
-    public function getOneTeacher($id) {
+    public function getOneTeacher(int $id) {
+        // Execute an SQL query retrieving a teacher given their ID
         $sql = "select * from t_teacher where idTeacher = " . $id;
         $res = $this -> querySimpleExecute($sql);
+
+        // Return a formatted array containing the teacher's full details.
         $teachers = $this -> formatData($res);
         return $teachers[0];
     }
 
     /**
-     * Gets the correct field given an ID.
-     * @param int $id ID fo the field.
-     * @return array an associative array that contains the field of study and
-     * its ID.
+     * Finds the corresponding section given an ID.
+     * 
+     * @param int $id The unique ID of the section.
+     * @return array An associative array that contains the field of study and
+     * its unique ID.
      */
-    public function getSectionById($id) {
+    public function getSectionById(int $id) {
         $sql = "select * from t_section where idSection = $id";
         $res = $this -> querySimpleExecute($sql);
         return $res -> fetchAll(PDO::FETCH_ASSOC)[0];
     }
 
     /**
-     * Gets a list of all sections.
-     * @return array an associative array that contains all sections found in 
+     * Gets a list of all sections found in the database.
+     * 
+     * @return array An associative array that contains all sections found in 
      * the database.
      */
     public function getSectionList() {
-        return $this -> querySimpleExecute("select * from t_section") 
-                     -> fetchAll(PDO::FETCH_ASSOC);
+        // SQL query string that retrives all sections
+        $sql = "select * from t_section";
+
+        // Executes and format the query
+        return $this -> formatData(
+            $this -> querySimpleExecute($sql)
+        );
     }
 
     /**
-     * Inserts a new teacher to the database.
-     * @param $data An array that contains the teacher's data. TODO
+     * Inserts a new teacher in the database.
+     * 
+     * @param $data An array that contains the teacher's data.
      */
     public function insertTeacher(array $data) {
         // SQL query to that inserts a new teacher to the database
@@ -256,7 +268,8 @@ class Database {
     }
 
     /**
-     * Given an ID, will remove the corresponding teacher from the database.
+     * Given an ID, removes the corresponding teacher from the database.
+     * @param int $id The unique ID of the teacher to be removed.
      */
     public function removeTeacher(int $id) {
         $sql = <<< SQL

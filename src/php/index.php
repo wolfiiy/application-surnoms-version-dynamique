@@ -7,7 +7,6 @@
  */
 
 require('database.php');
-
 $db = new Database();
 ?>
 
@@ -32,10 +31,7 @@ $db = new Database();
         <script src="../js/script.js"></script>
     </div>
 
-    <footer>
-        <p>Copyright GCR - bulle web-db - 2022</p>
-    </footer>
-
+    <?php include('footer.php');?>
 </body>
 
 </html>
