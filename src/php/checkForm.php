@@ -62,8 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $db -> editTeacher($data);
         } else {
             // If the get is empty, default to adding the teacher
-            $db -> insertTeacher($firstname, $lastname, $gender, $nickname, $origin, 
-                                 $section);
+            $db -> insertTeacher($data);
         }
     } else {
         echo <<< HTML

@@ -167,24 +167,30 @@ class Database {
      * Inserts a new teacher to the database.
      * @param $data An array that contains the teacher's data. TODO
      */
-    public function insertTeacher(string $firstName, string $lastName, 
-        string $gender, string $nickname, string $origin, int $idSection) {
-        $sql = "insert into t_teacher (teaFirstname, teaName, teaGender, 
-                                       teaNickname, teaOrigine, fkSection)
-                values (:teaFirstname, :teaName, :teaGender, :teaNickname, 
-                        :teaOrigine, :fkSection)";
+    public function insertTeacher(array $data) {
+        // SQL query to that inserts a new teacher to the database
+        $sql = <<< SQL
+            insert into
+                t_teacher 
+                (teaFirstname, teaName, teaGender, teaNickname, teaOrigine, 
+                fkSection)
+            values
+                (:teaFirstname, :teaName, :teaGender, :teaNickname, 
+                :teaOrigine, :fkSection)
+        SQL;
 
+        // Map placeholders to values from the data array.
         $binds = array(
-            ':teaFirstname' => $firstName,
-            ':teaName' => $lastName,
-            ':teaGender' => $gender,
-            ':teaNickname' => $nickname,
-            ':teaOrigine' => $origin,
-            ':fkSection' => $idSection
+            ':teaFirstname' => $data['firstname'],
+            ':teaName' => $data['lastname'],
+            ':teaGender' => $data['gender'],
+            ':teaNickname' => $data['nickname'],
+            ':teaOrigine' => $data['origin'],
+            ':fkSection' => $data['section']
         );
 
+        // Executes the query
         $this -> queryPrepareExecute($sql, $binds);
-
         header("Location: index.php");
     }
 
@@ -221,7 +227,6 @@ class Database {
 
         // Execute the query
         $this -> queryPrepareExecute($sql, $binds);
-
         header("Location: index.php");
     }
 
