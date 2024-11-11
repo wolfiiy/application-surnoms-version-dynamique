@@ -76,11 +76,25 @@ class Database {
     }
 
     /**
-     * TODO: � compl�ter
+     * Prepares, sanitizes and executes a query.
+     * @param string $query The query to be executed.
+     * @param array $binds An array containing all binds related to the query.
+     * @return PDOStatement|false an associative array containing the result
+     * of the query if it succeeded, false otherwise.
      */
-    private function queryPrepareExecute($query, $binds){
-        
-        // TODO: permet de pr�parer, de binder et d�ex�cuter une requ�te (select avec where ou insert, update et delete)
+    private function queryPrepareExecute(string $query, $binds){
+        try {
+            $req = $this -> connector -> prepare($query);
+            foreach ($binds as $name => $value) {
+                // binds['teaname'] = 'teachers name';
+                $req -> bindValue($name, $value, PDO::PARAM_STR);
+            }
+
+            if ($req -> execute()) return $req;
+            else return false;
+        } catch (PDOException $e) {
+            error_log("An error occured. " . $e -> getMessage());
+        }
     }
 
     /**
@@ -117,8 +131,12 @@ class Database {
      * queried teacher.
      */
     public function getOneTeacher($id) {
+        // Prepare / simple?
         $sql = "select * from t_teacher where idTeacher = " . $id;
         $res = $this -> querySimpleExecute($sql);
+        /*$sql = "select * from t_teacher where idTeacher = :idTeacher";
+        $binds = array(':idTeacher' => $id);
+        $res = $this -> queryPrepareExecute($sql, $binds);*/
         $teachers = $res -> fetchAll(PDO::FETCH_ASSOC);
         return $teachers[0];
     }
@@ -150,15 +168,22 @@ class Database {
      * @param $data An array that contains the teacher's data. TODO
      */
     public function insertTeacher(string $firstName, string $lastName, 
-        string $gender, string $nickname, string $origin, int $section) {
-        $sql = <<< SQL
-            insert into t_teacher (teaFirstname, teaName, teaGender, 
-                                   teaNickname, teaOrigine, fkSection)
-            values ("{$firstName}", "{$lastName}", "{$gender}", "{$nickname}",
-                    "{$origin}", "{$section}");
-        SQL;
+        string $gender, string $nickname, string $origin, int $idSection) {
+        $sql = "insert into t_teacher (teaFirstname, teaName, teaGender, 
+                                       teaNickname, teaOrigine, fkSection)
+                values (:teaFirstname, :teaName, :teaGender, :teaNickname, 
+                        :teaOrigine, :fkSection)";
 
-        $this -> querySimpleExecute($sql);
+        $binds = array(
+            ':teaFirstname' => $firstName,
+            ':teaName' => $lastName,
+            ':teaGender' => $gender,
+            ':teaNickname' => $nickname,
+            ':teaOrigine' => $origin,
+            ':fkSection' => $idSection
+        );
+
+        $this -> queryPrepareExecute($sql, $binds);
 
         header("Location: index.php");
     }
@@ -168,21 +193,35 @@ class Database {
      * @param $data An array that contains the teacher's data.
      */
     public function editTeacher(array $data) {
+        // SQL statement that, given the ID of a teacher, updates all fields.
         $sql = <<< SQL
             update 
                 t_teacher
             set 
-                teaFirstname = "{$data['firstname']}",
-                teaName = "{$data['lastname']}",
-                teaGender = "{$data['gender']}",
-                teaNickname = "{$data['nickname']}",
-                teaOrigine = "{$data['origin']}",
-                fkSection = {$data['section']}
+                teaFirstname = :teaFirstname,
+                teaName = :teaName,
+                teaGender = :teaGender,
+                teaNickname = :teaNickname,
+                teaOrigine = :teaOrigine,
+                fkSection = :fkSection
             where 
-                idTeacher = {$data['id']};
+                idTeacher = :idTeacher;
         SQL;
 
-        $this -> querySimpleExecute($sql);
+        // Map placeholders to values from the data array.
+        $binds = array(
+            ':idTeacher' => $data['id'],
+            ':teaFirstname' => $data['firstname'],
+            ':teaName' => $data['lastname'],
+            ':teaGender' => $data['gender'],
+            ':teaNickname' => $data['nickname'],
+            ':teaOrigine' => $data['origin'],
+            ':fkSection' => $data['section']
+        );
+
+        // Execute the query
+        $this -> queryPrepareExecute($sql, $binds);
+
         header("Location: index.php");
     }
 
