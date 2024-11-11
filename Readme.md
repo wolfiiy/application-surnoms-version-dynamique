@@ -9,3 +9,4 @@ Dans ce dépôt, vous trouverez une version statique (HTML5, CSS3 et JS) de cett
 - [] MVC
 - [] Array instead of vars in edit & add
 - [] Improve editTeacher input selection
+- [] Return null if nothing is found

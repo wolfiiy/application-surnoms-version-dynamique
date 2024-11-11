@@ -1,6 +1,9 @@
 <?php
 class Writer {
-    static function writeAllTeacher($teachers) {
+    static function writeAllTeacher() {
+        $db = new Database();
+        $teachers = $db -> getAllTeachers();
+        
         $table = <<< HTML
             <table>
                 <thead>
@@ -42,7 +45,7 @@ class Writer {
             </table>
         HTML;
 
-        return $table;
+        echo $table;
     }
 
     /**

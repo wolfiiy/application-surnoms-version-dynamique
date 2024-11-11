@@ -32,7 +32,7 @@ class Database {
      * @throws Exception If there is an error reading the config file.
      * @throws PDOException If the connection to the database fails.
      */
-    public function __construct(){
+    public function __construct() {
         try {
             // Attempt to read the config file
             $configFile = file_get_contents('../../config.json');
@@ -56,88 +56,113 @@ class Database {
                 $conf['DB_PASSWORD']
             );
         } catch (PDOException $e) {
-            die('Error: ' . $e -> getMessage());
+            // Kill the application if it failed to connect
+            die(
+                'An error occured when connecting to the database: ' 
+                . $e -> getMessage()
+            );
         }
     }
 
     /**
-     * Prepares and executes a simple query.
-     * @param string $query The query to execute.
-     * @return PDOStatement|false an associative array containing the result 
-     * of the query, or false if it did not go through.
+     * Executes a simple SQL query with no protection against SQL injections.
+     * Suitable for read-only operations with no user-provided values.
+     * 
+     * @param string $query The SQL query string to be executed.
+     * @return PDOStatement|false An associative array containing the result 
+     * of the query if successful, or `false` otherwise.
      */
-    private function querySimpleExecute(string $query){
+    private function querySimpleExecute(string $query) {
         try {
+            // Directly execute the query
             return $this -> connector -> query($query);
         } catch (PDOException $e) {
-            error_log("An error occured. " . $e -> getMessage());
+            // Log any PDO-related exceptions
+            error_log(
+                "An error occured during a simple query execution: " 
+                . $e -> getMessage()
+            );
             return false;
         }
     }
 
     /**
-     * Prepares, sanitizes and executes a query.
-     * @param string $query The query to be executed.
-     * @param array $binds An array containing all binds related to the query.
+     * Executes an SQL query with protection against SQL injections. Suitable
+     * for write operations with user-provided values.
+     * 
+     * @param string $query The SQL query string to be executed.
+     * @param array $binds An associative array of parameters to bind to the 
+     * query. Each array key should match the placeholder in the query string.
+     * (e.g. $binds['teaFirstname'] = 'John').
      * @return PDOStatement|false an associative array containing the result
      * of the query if it succeeded, false otherwise.
      */
-    private function queryPrepareExecute(string $query, $binds){
+    private function queryPrepareExecute(string $query, $binds) {
         try {
+            // Prepare the SQL query string by protecting it against SQL
+            // injections and binding values
             $req = $this -> connector -> prepare($query);
             foreach ($binds as $name => $value) {
-                // binds['teaname'] = 'teachers name';
                 $req -> bindValue($name, $value, PDO::PARAM_STR);
             }
 
+            // Return the request only if successful
             if ($req -> execute()) return $req;
             else return false;
         } catch (PDOException $e) {
-            error_log("An error occured. " . $e -> getMessage());
+            // Log any PDO-related exceptions
+            error_log(
+                "An error occured during a query execution. " 
+                . $e -> getMessage()
+            );
         }
     }
 
     /**
-     * TODO: � compl�ter
+     * Given an executed PDO statement, convert its result into an associative
+     * array.
+     * 
+     * @param PDOStatement $req An executed statement.
+     * @return array An associative array containing the data returned by the 
+     * statement.
      */
-    private function formatData($req){
-
-        // TODO: traiter les donn�es pour les retourner par exemple en tableau associatif (avec PDO::FETCH_ASSOC)
+    private function formatData(PDOStatement $req) {
+        return $req -> fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
      * TODO: � compl�ter
      */
-    private function unsetData($req){
+    private function unsetData($req) {
 
         // TODO: vider le jeu d�enregistrement
     }
 
     /**
-     * Gets a list of all teachers registered in the database.
-     * @return string a table containing all teachers.
+     * Gets a list of all the teachers found in the database.
+     * 
+     * @return array An associative array containing all teachers and their
+     * details.
      */
-    public function getAllTeachers(){
+    public function getAllTeachers() {
+        // Executes an SQL query that requests all teachers
         $sql = "select * from t_teacher";
         $res = $this -> querySimpleExecute($sql);
-        $teachers = $res -> fetchAll(PDO::FETCH_ASSOC);
-        return Writer::writeAllTeacher($teachers);
+
+        // Returns a formatted associative array
+        return $this -> formatData($res);
     }
 
     /**
-     * Gets information on a teacher given an ID.
-     * @param int $id ID of the teacher.
-     * @return array an associative array that contains the details about the
-     * queried teacher.
+     * Retrieves detailed information on a specific teacher, given their ID.
+     * @param int $id The unique ID of the teacher..
+     * @return array An associative array that contains details about the
+     * specified teacher.
      */
     public function getOneTeacher($id) {
-        // Prepare / simple?
         $sql = "select * from t_teacher where idTeacher = " . $id;
         $res = $this -> querySimpleExecute($sql);
-        /*$sql = "select * from t_teacher where idTeacher = :idTeacher";
-        $binds = array(':idTeacher' => $id);
-        $res = $this -> queryPrepareExecute($sql, $binds);*/
-        $teachers = $res -> fetchAll(PDO::FETCH_ASSOC);
+        $teachers = $this -> formatData($res);
         return $teachers[0];
     }
 
@@ -181,12 +206,12 @@ class Database {
 
         // Map placeholders to values from the data array.
         $binds = array(
-            ':teaFirstname' => $data['firstname'],
-            ':teaName' => $data['lastname'],
-            ':teaGender' => $data['gender'],
-            ':teaNickname' => $data['nickname'],
-            ':teaOrigine' => $data['origin'],
-            ':fkSection' => $data['section']
+            ':teaFirstname' => $data['firstname'],  
+            ':teaName' => $data['lastname'],        
+            ':teaGender' => $data['gender'],        
+            ':teaNickname' => $data['nickname'],    
+            ':teaOrigine' => $data['origin'],       
+            ':fkSection' => $data['section']        
         );
 
         // Executes the query
