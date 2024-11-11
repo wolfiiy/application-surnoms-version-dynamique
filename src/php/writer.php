@@ -1,4 +1,10 @@
 <?php
+/**
+ * Author: STE
+ * Date: November 11th, 2024
+ * Description: Writes various things on the page.
+ */
+
 class Writer {
     /**
      * Writes a list of all teachers found in the database. The list allows

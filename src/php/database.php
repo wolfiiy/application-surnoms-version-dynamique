@@ -280,6 +280,46 @@ class Database {
         $this -> querySimpleExecute($sql);
         header("Location: index.php");
     }
+
+    /**
+     * Logs the user in.
+     * 
+     * @param string $username The username of the user to be logged in.
+     * @param string $password The password entered by the user.
+     */
+    public function loginUser(string $username, string $password) {
+        error_log("Trying to log in...");
+
+        // Get the actual user's password's hash from the database
+        $sql = <<< SQL
+            select *
+            from t_user
+            where useLogin = :useLogin
+        SQL;
+
+        $binds = array(
+            ':useLogin' => $username
+        );
+
+        // Retrive user data
+        $user = $this -> queryPrepareExecute($sql, $binds);
+        $user = $this -> formatData($user);
+        $user = $user[0];
+    
+        // Log the user if the password is correct
+        if (password_verify($password, $user['usePassword'])) {
+            // Save user information
+            $_SESSION['user']['login'] = $user['useLogin'];
+            $_SESSION['user']['privileges'] = $user['useAdministrator'];
+            
+            // Redirect to home page
+            header("Location: index.php");
+            exit();
+        } else {
+            error_log("Login failed: username or password is incorrect.");
+            header("Location: index.php?error=invalid_credentials");
+        }
+    }
 }
 
 

@@ -5,18 +5,46 @@ Dexription: Header to be used throughout the nickname application. Displays the
 application's name and a navigation menu.
 -->
 
+<?php
+session_start();
+
+// Checks whether the user is logged in
+$isLoggedIn = isset($_SESSION['user']);
+?>
+
 <header>
     <div class="container-header">
         <div class="titre-header">
             <h1>Surnom des enseignants</h1>
         </div>
         <div class="login-container">
-            <form action="#" method="post">
-                <label for="user"> </label>
-                <input type="text" name="user" id="user" placeholder="Login">
-                <label for="password"> </label>
-                <input type="password" name="password" id="password" placeholder="Mot de passe">
-                <button type="submit" class="btn btn-login">Se connecter</button>
+            <form action="<?php echo $isLoggedIn ? 'logout.php' : 'login.php'; ?>"
+                  method="post">
+                <?php
+                    if ($isLoggedIn){
+                        echo $_SESSION['user']['login'];
+                    } else {
+                        $form = <<< HTML
+                            <label for="username"></label>
+                            <input type="text" 
+                                   name="username" 
+                                   id="username" 
+                                   placeholder="Login">
+
+                            <label for="password"></label>
+                            <input type="password" 
+                                   name="password" 
+                                   id="password" 
+                                   placeholder="Mot de passe">
+                        HTML;
+
+                        echo $form;
+                    }
+                ?>
+                
+                <button type="submit" class="btn <?php echo $isLoggedIn ? "btn-logout" : "btn-login" ?>">
+                    <?php echo $isLoggedIn ? 'Se déconnecter' : 'Se connecter'; ?>
+                </button>
             </form>
         </div>
     </div>
