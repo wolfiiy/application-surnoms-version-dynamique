@@ -9,7 +9,7 @@
 require('views/partials/head.php');
 require('views/partials/nav.php');
 
-require('database.php');
+require('models/Database.php');
 $db = new Database();
 ?>
 

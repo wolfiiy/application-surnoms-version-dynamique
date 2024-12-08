@@ -5,8 +5,8 @@
  * Description: Verifies the information obtained through a form.
  */
 
-require('constants.php');
-require('database.php');
+require('models/Constants.php');
+require('models/Database.php');
 
 $db = new Database();
 

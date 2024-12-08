@@ -5,7 +5,7 @@
  * Description: Removes a teacher from the database.
  */
 
-require('database.php');
+require('models/Database.php');
 
 // If the 'id' variable has been set, remove the corresponding teacher.
 if (isset($_GET['id'])) {

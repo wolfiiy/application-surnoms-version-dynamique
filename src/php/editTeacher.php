@@ -8,8 +8,8 @@
 require('views/partials/head.php');
 require('views/partials/nav.php');
 
-require('constants.php');
-require('database.php');
+require('models/Constants.php');
+require('models/Database.php');
 $db = new Database();
 
 // Get the requested teacher
