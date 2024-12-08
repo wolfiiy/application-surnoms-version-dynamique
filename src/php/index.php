@@ -6,19 +6,11 @@
  * registered nicknames and allows for edition of said nicknames.
  */
 
-require('views/partials/head.php');
-require('views/partials/nav.php');
-
 require('models/Database.php');
 $db = new Database();
+
+require('views/partials/head.php');
+require('views/partials/nav.php');
+require('views/indexView.php');
+require('views/partials/footer.php');
 ?>
-
-<div class="container">
-    <h3>Liste des enseignants</h3>
-    <form action="#" method="post">
-        <?php Writer::writeAllTeacher();?>
-    </form>
-    <script src="../js/script.js"></script>
-</div>
-
-<?php include('views/partials/footer.php');?>
