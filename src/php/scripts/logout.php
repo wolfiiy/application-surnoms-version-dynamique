@@ -1,5 +1,6 @@
 <?php
 /**
+ * ETML
  * Author: STE
  * Date: November 11th, 2024
  * Description: Logs the user off and destroy all session data.

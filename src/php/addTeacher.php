@@ -4,6 +4,7 @@
  * Date: October 1st, 2024
  * Description: Allows for the addition of teachers to the nick names database.
  */
+
 require('models/Constants.php');
 require('models/Database.php');
 require('views/partials/head.php');

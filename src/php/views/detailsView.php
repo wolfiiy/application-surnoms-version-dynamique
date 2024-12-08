@@ -1,3 +1,10 @@
+<!-- 
+ETML
+Authors: GCR, STE
+Date: December 8th, 2024
+Description: Displays details about a specific teacher.
+-->
+
 <div class="container">
     <div class="user-head">
         <h3>Détail : <?=$teacher['teaFirstname'] . " " . $teacher['teaName'];?>

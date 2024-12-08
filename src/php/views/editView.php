@@ -1,3 +1,10 @@
+<!-- 
+ETML
+Authors: GCR, STE
+Date: December 8th, 2024
+Description: Holds the form used to modify a teacher from the database.
+-->
+
 <div class="container">
     <div class="user-body">
         <form action="checkForm.php?id=<?=$teacher['idTeacher']?>" method="post" id="form">

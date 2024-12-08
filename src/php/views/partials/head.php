@@ -1,6 +1,6 @@
 <!--
 ETML
-Author: GCE, STE
+Authors: GCR, STE
 Date: December 8th, 2024
 Description: Head HTML element template. Opens the body and dynamically sets the
              title of the page.

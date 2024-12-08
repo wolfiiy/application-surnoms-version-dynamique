@@ -2,7 +2,9 @@
 /**
  * Authors: GCR, STE
  * Date: October 1st, 2024
- * Description: Detailed view of a given teacher.
+ * Description: Display detailed information about a specific teacher, including 
+ *              their section, gender, and relevant actions. Fetches details 
+ *              from the database, then renders them in a view.
  */
 
 require('views/partials/head.php');

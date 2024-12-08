@@ -1,3 +1,10 @@
+<!-- 
+ETML
+Authors: GCR, STE
+Date: December 8th, 2024
+Description: Holds the form used to add a teacher to the database.
+-->
+
 <div class="container">
     <div class="user-body">
         <form action="checkForm.php?action=insert" method="post" id="form">
