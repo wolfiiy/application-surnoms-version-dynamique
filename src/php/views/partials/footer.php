@@ -8,7 +8,10 @@ Description: Footer used to display copyright information and close the HTML
 
 <footer>
     <p>
-        Copyright GCR, STE - ICT 151 - 2024
+        Copyright GCR, STE - ICT 151 - 2024 - 
+        <a href="https://github.com/wolfiiy/application-surnoms-version-statique">
+            Code source
+        </a>
     </p>
 </footer>
 </body>
