@@ -5,7 +5,10 @@
  * Description: Detailed view of a given teacher.
  */
 
-// Connection to the database
+require('views/partials/head.php');
+require('views/partials/nav.php');
+
+require('constants.php');
 require('database.php');
 $db = new Database();
 
@@ -26,54 +29,38 @@ if (isset($_GET['id'])) {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../css/style.css" rel="stylesheet">
-    <title>Détails de <?=$teacher['teaNickname']?></title>
-</head>
-
-<body>
-    <?php include('header.php')?>
-
-    <div class="container">
-        <div class="user-head">
-            <h3>Détail : <?=$teacher['teaFirstname'] . " " . $teacher['teaName'];?>
-                <img style="margin-left: 1vw;" height="20em" src="../img/<?=$genderImage?>" alt="male symbole">
-            </h3>
-            <p>
-                <?=ucwords($section['secName']);?>
-            </p>
-            <div class="actions">
-                <a href="editTeacher.php?id=<?=$teacher['idTeacher']?>">
-                    <img height="20em" src="../img/edit.png" alt="edit icon">
-                </a>
-                <a href="javascript:confirmDelete()">
-                    <img height="20em" src="../img/delete.png" alt="delete icon"> 
-                </a>
-            </div>
-        </div>
-
-        <div class="user-body">
-            <div class="left">
-                <p>
-                    Surnom : <?=$teacher['teaNickname'];?>
-                </p>
-                <p>
-                    <?=$teacher['teaOrigine'];?>
-                </p>
-            </div>
-        </div>
-
-        <div class="user-footer">
-            <a href="index.php">Retour à la page d'accueil</a>
+<div class="container">
+    <div class="user-head">
+        <h3>Détail : <?=$teacher['teaFirstname'] . " " . $teacher['teaName'];?>
+            <img style="margin-left: 1vw;" height="20em" src="../img/<?=$genderImage?>" alt="male symbole">
+        </h3>
+        <p>
+            <?=ucwords($section['secName']);?>
+        </p>
+        <div class="actions">
+            <a href="editTeacher.php?id=<?=$teacher['idTeacher']?>">
+                <img height="20em" src="../img/edit.png" alt="edit icon">
+            </a>
+            <a href="javascript:confirmDelete()">
+                <img height="20em" src="../img/delete.png" alt="delete icon"> 
+            </a>
         </div>
     </div>
 
-    <?php include('footer.php');?>
-    <script src="js/script.js"></script>
-</body>
-</html>
+    <div class="user-body">
+        <div class="left">
+            <p>
+                Surnom : <?=$teacher['teaNickname'];?>
+            </p>
+            <p>
+                <?=$teacher['teaOrigine'];?>
+            </p>
+        </div>
+    </div>
+
+    <div class="user-footer">
+        <a href="index.php">Retour à la page d'accueil</a>
+    </div>
+</div>
+
+<?php include('views/partials/footer.php');?>

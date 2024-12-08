@@ -6,32 +6,19 @@
  * registered nicknames and allows for edition of said nicknames.
  */
 
+require('views/partials/head.php');
+require('views/partials/nav.php');
+
 require('database.php');
 $db = new Database();
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="../css/style.css" rel="stylesheet">
-    <title>Surnoms</title>
-</head>
+<div class="container">
+    <h3>Liste des enseignants</h3>
+    <form action="#" method="post">
+        <?php Writer::writeAllTeacher();?>
+    </form>
+    <script src="../js/script.js"></script>
+</div>
 
-<body>
-    <?php include('header.php') ?>
-
-    <div class="container">
-        <h3>Liste des enseignants</h3>
-        <form action="#" method="post">
-            <?php Writer::writeAllTeacher();?>
-        </form>
-        <script src="../js/script.js"></script>
-    </div>
-
-    <?php include('footer.php');?>
-</body>
-
-</html>
+<?php include('views/partials/footer.php');?>
