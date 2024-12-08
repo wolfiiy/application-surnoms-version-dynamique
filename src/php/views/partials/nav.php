@@ -9,6 +9,8 @@ Description: Header to be used throughout the nickname application. Displays the
 <?php
 // Path is relative to the server (i.e. src)
 require_once('scripts/sessionCheck.php');
+var_dump($_SESSION);
+var_dump($isLoggedIn);
 ?>
 
 <header>

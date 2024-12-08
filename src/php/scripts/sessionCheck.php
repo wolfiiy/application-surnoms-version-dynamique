@@ -7,5 +7,5 @@
  */
 
 session_start();
-$isLoggedIn = isset($_SESSION[$user]);
+$isLoggedIn = isset($_SESSION['user']);
 ?>
