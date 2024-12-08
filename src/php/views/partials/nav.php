@@ -19,7 +19,7 @@ var_dump($isLoggedIn);
             <h1>Surnom des enseignants</h1>
         </div>
         <div class="login-container">
-            <form action="<?php echo $isLoggedIn ? 'logout.php' : 'login.php'; ?>"
+            <form action="<?php echo $isLoggedIn ? 'scripts/logout.php' : 'login.php'; ?>"
                   method="post">
                 <?php
                     if ($isLoggedIn){

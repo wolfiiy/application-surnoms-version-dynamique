@@ -5,7 +5,7 @@
  * Description: Lets the user log into the application.
  */
 
-require('models/Database.php');
+require_once('models/Database.php');
 $db = new Database();
 
 session_start();
