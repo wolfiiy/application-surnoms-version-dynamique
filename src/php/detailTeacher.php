@@ -27,7 +27,7 @@ if (isset($_GET['id'])) {
     );
 
     $genderImage = $genderImagePath[$teacher['teaGender']];
-    $modifyUrl = "editTeacher.php?id={$teacher['idTeacher']}";
+    $modifyUrl = "add.php?id={$teacher['idTeacher']}";
     $deleteUrl = "javascript:confirmDelete({$teacher['idTeacher']})";
 }
 

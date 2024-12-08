@@ -39,7 +39,7 @@ class Writer {
                         {$t['teaNickname']}
                     </td>
                     <td class="containerOptions">
-                        <a href="editTeacher.php?id={$t['idTeacher']}">
+                        <a href="add.php?id={$t['idTeacher']}">
                             <img height="20em" src="../img/edit.png" alt="edit">
                         </a>
                         <a href="javascript:confirmDelete({$t['idTeacher']})">
