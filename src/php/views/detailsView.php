@@ -7,10 +7,10 @@
             <?=ucwords($section['secName']);?>
         </p>
         <div class="actions">
-            <a href="editTeacher.php?id=<?=$teacher['idTeacher']?>">
+            <a href="<?=$modifyUrl;?>">
                 <img height="20em" src="../img/edit.png" alt="edit icon">
             </a>
-            <a href="javascript:confirmDelete()">
+            <a href="<?=$deleteUrl;?>">
                 <img height="20em" src="../img/delete.png" alt="delete icon"> 
             </a>
         </div>
@@ -30,4 +30,5 @@
     <div class="user-footer">
         <a href="index.php">Retour à la page d'accueil</a>
     </div>
+    <script src="../../js/script.js"></script>
 </div>
