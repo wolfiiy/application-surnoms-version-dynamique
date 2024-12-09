@@ -84,7 +84,7 @@ if (!$isEdit) {
 
 foreach ($sections as $s) {
     // Default to the teacher's section
-    if ($section['idSection'] == $s['idSection'])
+    if (isset($section) && $section['idSection'] == $s['idSection'])
         $selected = 'selected';
     else
         $selected = null;
