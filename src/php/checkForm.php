@@ -9,7 +9,6 @@ require('models/Constants.php');
 require('models/Database.php');
 require_once('models/TeacherModel.php');
 
-$db = new Database();
 $teacherModel = new TeacherModel();
 
 // Check for filled forms

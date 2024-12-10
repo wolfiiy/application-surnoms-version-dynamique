@@ -9,11 +9,9 @@
 
 require('views/partials/head.php');
 require('views/partials/nav.php');
-
 require('models/Constants.php');
-require('models/Database.php');
 require('models/SectionModel.php');
-$db = new Database();
+
 $sectionModel = new SectionModel();
 $teacherModel = new TeacherModel();
 

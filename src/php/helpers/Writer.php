@@ -16,8 +16,8 @@ class Writer {
      * authorized users to view, edit and/or delete a teacher's details.
      */
     static function writeAllTeacher() {
-        $db = new TeacherModel();
-        $teachers = $db -> getAllTeachersRanked();
+        $teacherModel = new TeacherModel();
+        $teachers = $teacherModel -> getAllTeachersRanked();
         $mostVotedTeacher = $teachers[0]['idTeacher'];
 
         // Table header

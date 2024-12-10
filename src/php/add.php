@@ -8,11 +8,9 @@
  */
 
 require_once('models/Constants.php');
-require_once('models/Database.php');
 require_once('models/SectionModel.php');
 require_once('models/TeacherModel.php');
 
-$db = new Database();
 $sectionModel = new SectionModel();
 $teacherModel = new TeacherModel();
 

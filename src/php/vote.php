@@ -6,9 +6,8 @@
  * Description: Logic used to process user votes.
  */
 
-require('models/Database.php');
 require_once('models/TeacherModel.php');
-$db = new Database();
+
 $teacherModel = new TeacherModel();
 
 if (isset($_GET['id'])) {
