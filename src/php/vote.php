@@ -6,18 +6,19 @@
  * Description: Logic used to process user votes.
  */
 
-/*require('views/partials/head.php');
-require('views/partials/nav.php');*/
-
 require('models/Database.php');
 $db = new Database();
 
-// Proceed if a teacher has been selected
 if (isset($_GET['id'])) {
+    // If the ID is set, then the "J'élis" link has been clicked.
+    // Proceed for one teacher.
     $teacher = $db -> getOneTeacher($_GET['id']);
     $db -> vote($teacher['idTeacher']);
+
     header("Location: index.php");
 } elseif (isset($_POST['idTeacher'])) {
+    // If the "idTeacher" array exists, then the user has clicked at least one
+    // of the checkboxes.    
     $teachers = $_POST['idTeacher'];
 
     foreach ($teachers as $t => $id) {
@@ -26,6 +27,7 @@ if (isset($_GET['id'])) {
 
     header("Location: index.php");
 } else {
+    // Throw a silent error if no teacher has been selected.
     header("Location: index.php?error=no_teacher_selected");
 }
 ?>
