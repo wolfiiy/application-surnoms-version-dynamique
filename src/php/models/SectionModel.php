@@ -7,8 +7,11 @@
 
 require_once('Database.php');
 
+/**
+ * Model used to interact with the "t_section" table of the database.
+ */
 class SectionModel extends Database {
-    
+
     /**
      * Finds the corresponding section given an ID.
      * 

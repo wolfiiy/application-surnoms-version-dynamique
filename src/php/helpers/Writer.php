@@ -5,6 +5,8 @@
  * Date: November 11th, 2024
  */
 
+require_once('models/TeacherModel.php');
+
 /**
  * Helper used to dynamically write HTML code.
  */
@@ -14,7 +16,7 @@ class Writer {
      * authorized users to view, edit and/or delete a teacher's details.
      */
     static function writeAllTeacher() {
-        $db = new Database();
+        $db = new TeacherModel();
         $teachers = $db -> getAllTeachersRanked();
         $mostVotedTeacher = $teachers[0]['idTeacher'];
 

@@ -5,7 +5,7 @@
  * Date: September 30th, 2024
  */
 
-include('helpers/Writer.php');
+include_once('helpers/Writer.php');
 
 /**
  * Handles database interactions.
@@ -129,16 +129,6 @@ class Database {
      */
     protected function formatData(PDOStatement $req) {
         return $req -> fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    /**
-     * Gets a list of all the teachers found in the database, sorted from most
-     * to least voted for.
-     */
-    public function getAllTeachersRanked() {
-        $sql = "select * from t_teacher order by teaVotes desc";
-        $res = $this -> querySimpleExecute($sql);
-        return $this -> formatData($res);
     }
 
     /**
