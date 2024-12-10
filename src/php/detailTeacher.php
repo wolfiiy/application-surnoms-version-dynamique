@@ -27,8 +27,18 @@ if (isset($_GET['id'])) {
     );
 
     $genderImage = $genderImagePath[$teacher['teaGender']];
+    $nbVotes = $teacher['teaVotes'];
+    $labelVotes = "Nombre de votes: ";
+
+    if ($nbVotes > 0) {
+        $labelVotes .= $nbVotes;
+    } else {
+        $labelVotes = "Aucun votes";
+    }
+
     $modifyUrl = "add.php?id={$teacher['idTeacher']}";
     $deleteUrl = "javascript:confirmDelete({$teacher['idTeacher']})";
+    $voteUrl = "vote.php?id={$teacher['idTeacher']}";
 }
 
 require('views/detailsView.php');

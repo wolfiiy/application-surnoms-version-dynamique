@@ -283,6 +283,21 @@ class Database {
     }
 
     /**
+     * Lets the user vote for a teacher.
+     * @param int $id Unique ID of the teacher.
+     */
+    public function vote(int $id) {
+        $sql = <<< SQL
+            update t_teacher
+            set teaVotes = teaVotes + 1
+            where idTeacher = {$id};
+        SQL;
+
+        $this -> querySimpleExecute($sql);
+        header("Location: index.php");
+    }
+
+    /**
      * Logs the user in.
      * 
      * @param string $username The username of the user to be logged in.

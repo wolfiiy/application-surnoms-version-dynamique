@@ -13,6 +13,7 @@ Description: Displays details about a specific teacher.
         <p>
             <?=ucwords($section['secName']);?>
         </p>
+
         <div class="actions">
             <a href="<?=$modifyUrl;?>">
                 <img height="20em" src="../img/edit.png" alt="edit icon">
@@ -30,6 +31,16 @@ Description: Displays details about a specific teacher.
             </p>
             <p>
                 <?=$teacher['teaOrigine'];?>
+            </p>
+        </div>
+
+        <div class="right">
+            <p>
+                <a href="<?=$voteUrl;?>">J'élis</a>
+            </p>
+
+            <p>
+                <?=$labelVotes;?>
             </p>
         </div>
     </div>

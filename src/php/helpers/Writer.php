@@ -23,6 +23,7 @@ class Writer {
                         <th>Nom complet</th>
                         <th>Surnom</th>
                         <th>Options</th>
+                        <th>Votes</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,6 +49,9 @@ class Writer {
                         <a href="detailTeacher.php?id={$t['idTeacher']}">
                             <img height="20em" src="../img/detail.png" alt="detail">
                         </a>
+                    </td>
+                    <td>
+                        <a href="vote.php?id={$t['idTeacher']}">J'elis</a>
                     </td>
                 </tr>
             HTML;
