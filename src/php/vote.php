@@ -16,6 +16,15 @@ $db = new Database();
 if (isset($_GET['id'])) {
     $teacher = $db -> getOneTeacher($_GET['id']);
     $db -> vote($teacher['idTeacher']);
+    header("Location: index.php");
+} elseif (isset($_POST['idTeacher'])) {
+    $teachers = $_POST['idTeacher'];
+
+    foreach ($teachers as $t => $id) {
+        $db -> vote($id);
+    }
+
+    header("Location: index.php");
 } else {
     header("Location: index.php?error=no_teacher_selected");
 }

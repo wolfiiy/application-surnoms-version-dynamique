@@ -132,11 +132,13 @@ class Database {
     }
 
     /**
-     * TODO: � compl�ter
+     * Gets a list of all the teachers found in the database, sorted from most
+     * to least voted for.
      */
-    private function unsetData($req) {
-
-        // TODO: vider le jeu d�enregistrement
+    public function getAllTeachersRanked() {
+        $sql = "select * from t_teacher order by teaVotes desc";
+        $res = $this -> querySimpleExecute($sql);
+        return $this -> formatData($res);
     }
 
     /**
@@ -294,7 +296,6 @@ class Database {
         SQL;
 
         $this -> querySimpleExecute($sql);
-        header("Location: index.php");
     }
 
     /**

@@ -13,13 +13,15 @@ class Writer {
      */
     static function writeAllTeacher() {
         $db = new Database();
-        $teachers = $db -> getAllTeachers();
+        $teachers = $db -> getAllTeachersRanked();
+        $mostVotedTeacher = $teachers[0]['idTeacher'];
 
         // Table header
         $table = <<< HTML
             <table>
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Nom complet</th>
                         <th>Surnom</th>
                         <th>Options</th>
@@ -31,8 +33,26 @@ class Writer {
 
         // Teacher(s) rows
         foreach ($teachers as $t) {
+            $votesLabel = "";
+
+            if ($t['teaVotes'] > 0) {
+                $votesLabel .= $t['teaVotes'] . " voix";
+
+                if ($t['idTeacher'] == $mostVotedTeacher)
+                    $votesLabel .= " Surnom le plus populaire";
+            }
+            else {
+                $votesLabel = "Allez élisez-moi";
+            }
+
             $table .= <<< HTML
                 <tr>
+                    <td>
+                        <input type="checkbox" 
+                               name="idTeacher[]" 
+                               value="{$t['idTeacher']}"
+                        >
+                    </td>
                     <td>
                         {$t['teaFirstname']} {$t['teaName']}
                     </td>
@@ -51,7 +71,10 @@ class Writer {
                         </a>
                     </td>
                     <td>
-                        <a href="vote.php?id={$t['idTeacher']}">J'elis</a>
+                        <p>
+                            <a href="vote.php?id={$t['idTeacher']}">J'élis</a> 
+                            {$votesLabel}
+                        </p>
                     </td>
                 </tr>
             HTML;
