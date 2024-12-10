@@ -9,8 +9,10 @@
 
 require('models/Constants.php');
 require('models/Database.php');
+require('models/SectionModel.php');
 
 $db = new Database();
+$sectionModel = new SectionModel();
 
 // Placeholder values
 $firstName = "";
@@ -23,7 +25,7 @@ if (isset($_GET['id'])) {
     $isEdit = true;
     
     $teacher = $db -> getOneTeacher($_GET['id']);
-    $section = $db -> getSectionById($teacher['fkSection']);
+    $section = $sectionModel -> getSectionById($teacher['fkSection']);
     
     $pageTitle = "Modification";
     $formTitle = "Modification de {$teacher['teaNickname']}";
@@ -74,7 +76,7 @@ if (isset($_GET['id'])) {
 }
 
 // The section dropdown has to be filled in both cases
-$sections = $db -> getSectionList();
+$sections = $sectionModel -> getSectionList();
 $sectionList = "";
 
 // Add a placeholder if adding a teacher

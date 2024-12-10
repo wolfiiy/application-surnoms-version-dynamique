@@ -12,12 +12,14 @@ require('views/partials/nav.php');
 
 require('models/Constants.php');
 require('models/Database.php');
+require('models/SectionModel.php');
 $db = new Database();
+$sectionModel = new SectionModel();
 
 // Get the requested teacher
 if (isset($_GET['id'])) {
     $teacher = $db -> getOneTeacher($_GET['id']);
-    $section = $db -> getSectionById($teacher['fkSection']);
+    $section = $sectionModel -> getSectionById($teacher['fkSection']);
 
     // Map gender to the correct image
     $genderImagePath = array(

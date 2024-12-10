@@ -73,7 +73,7 @@ class Database {
      * @return PDOStatement|false An associative array containing the result 
      * of the query if successful, or `false` otherwise.
      */
-    private function querySimpleExecute(string $query) {
+    protected function querySimpleExecute(string $query) {
         try {
             // Directly execute the query
             return $this -> connector -> query($query);
@@ -98,7 +98,7 @@ class Database {
      * @return PDOStatement|false an associative array containing the result
      * of the query if it succeeded, false otherwise.
      */
-    private function queryPrepareExecute(string $query, $binds) {
+    protected function queryPrepareExecute(string $query, $binds) {
         try {
             // Prepare the SQL query string by protecting it against SQL
             // injections and binding values
@@ -127,7 +127,7 @@ class Database {
      * @return array An associative array containing the data returned by the 
      * statement.
      */
-    private function formatData(PDOStatement $req) {
+    protected function formatData(PDOStatement $req) {
         return $req -> fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -171,35 +171,6 @@ class Database {
         // Return a formatted array containing the teacher's full details.
         $teachers = $this -> formatData($res);
         return $teachers[0];
-    }
-
-    /**
-     * Finds the corresponding section given an ID.
-     * 
-     * @param int $id The unique ID of the section.
-     * @return array An associative array that contains the field of study and
-     * its unique ID.
-     */
-    public function getSectionById(int $id) {
-        $sql = "select * from t_section where idSection = $id";
-        $res = $this -> querySimpleExecute($sql);
-        return $res -> fetchAll(PDO::FETCH_ASSOC)[0];
-    }
-
-    /**
-     * Gets a list of all sections found in the database.
-     * 
-     * @return array An associative array that contains all sections found in 
-     * the database.
-     */
-    public function getSectionList() {
-        // SQL query string that retrives all sections
-        $sql = "select * from t_section";
-
-        // Executes and format the query
-        return $this -> formatData(
-            $this -> querySimpleExecute($sql)
-        );
     }
 
     /**
