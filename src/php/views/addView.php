@@ -50,7 +50,7 @@ isEdit
                 </select>
             </p>
             <p>
-                <input type="submit" value="Ajouter">
+                <input type="submit" value="<?=$submitLabel;?>">
                 <button type="button" 
                         onclick="document.getElementById('form').reset();"
                 >
