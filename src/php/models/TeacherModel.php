@@ -136,8 +136,9 @@ class TeacherModel extends Database {
      * DELETE OPERATIONS
      */
     /**
-     * Given an ID, removes the corresponding teacher from the database.
-     * @param int $id The unique ID of the teacher to be removed.
+     * Removes a specific teacher from the database.
+     * 
+     * @param int $id The unique ID of the teacher to remove.
      */
     public function removeTeacher(int $id) {
         $sql = <<< SQL
@@ -146,11 +147,11 @@ class TeacherModel extends Database {
         SQL;
 
         $this -> querySimpleExecute($sql);
-        header("Location: index.php");
     }
 
     /**
      * Lets the user vote for a teacher.
+     * 
      * @param int $id Unique ID of the teacher.
      */
     public function vote(int $id) {
