@@ -3,7 +3,7 @@
  * ETML
  * Author: STE
  * Date: December 10th, 2024
- * Description:
+ * Description: Logic used to process user votes.
  */
 
 /*require('views/partials/head.php');
