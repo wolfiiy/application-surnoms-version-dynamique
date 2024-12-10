@@ -34,6 +34,9 @@ class TeacherModel extends Database {
     /**
      * Gets a list of all the teachers found in the database, sorted from most
      * to least voted for.
+     * 
+     * @return array A list of all teachers, sorted from most to least voted 
+     * for.
      */
     public function getAllTeachersRanked() {
         $sql = "select * from t_teacher order by teaVotes desc";
@@ -53,7 +56,7 @@ class TeacherModel extends Database {
         $sql = "select * from t_teacher where idTeacher = " . $id;
         $res = $this -> querySimpleExecute($sql);
 
-        // Return a formatted array containing the teacher's full details.
+        // Return a formatted array containing the full teacher details.
         $teachers = $this -> formatData($res);
         return $teachers[0];
     }
@@ -64,6 +67,7 @@ class TeacherModel extends Database {
 
     /**
      * Inserts a new teacher in the database.
+     * 
      * @param $data An array that contains the teacher's data.
      */
     public function insertTeacher(array $data) {
@@ -90,11 +94,11 @@ class TeacherModel extends Database {
 
         // Executes the query
         $this -> queryPrepareExecute($sql, $binds);
-        header("Location: index.php");
     }
 
     /**
-     * Updates a teacher's information and redirects the user to the home page.
+     * Updates informatin regarding a specific teacher.
+     * 
      * @param $data An array that contains the teacher's data.
      */
     public function editTeacher(array $data) {
@@ -126,7 +130,6 @@ class TeacherModel extends Database {
 
         // Execute the query
         $this -> queryPrepareExecute($sql, $binds);
-        header("Location: index.php");
     }
 
     /*

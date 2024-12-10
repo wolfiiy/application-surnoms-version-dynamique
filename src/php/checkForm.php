@@ -61,9 +61,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // If the id is set, update an existing teacher
             $data["id"] = $_GET['id'];
             $teacherModel -> editTeacher($data);
+            header("Location: index.php");
         } else {
             // If the get is empty, default to adding the teacher
             $teacherModel -> insertTeacher($data);
+            header("Location: index.php");
         }
     } else {
         echo <<< HTML
