@@ -15,7 +15,7 @@ if (isset($_GET['id'])) {
     // If the ID is set, then the "J'élis" link has been clicked.
     // Proceed for one teacher.
     $teacher = $teacherModel -> getOneTeacher($_GET['id']);
-    $db -> vote($teacher['idTeacher']);
+    $teacherModel -> vote($teacher['idTeacher']);
 
     header("Location: index.php");
 } elseif (isset($_POST['idTeacher'])) {
@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
     $teachers = $_POST['idTeacher'];
 
     foreach ($teachers as $t => $id) {
-        $db -> vote($id);
+        $teacherModel -> vote($id);
     }
 
     header("Location: index.php");

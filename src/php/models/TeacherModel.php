@@ -145,5 +145,19 @@ class TeacherModel extends Database {
         $this -> querySimpleExecute($sql);
         header("Location: index.php");
     }
+
+    /**
+     * Lets the user vote for a teacher.
+     * @param int $id Unique ID of the teacher.
+     */
+    public function vote(int $id) {
+        $sql = <<< SQL
+            update t_teacher
+            set teaVotes = teaVotes + 1
+            where idTeacher = {$id};
+        SQL;
+
+        $this -> querySimpleExecute($sql);
+    }
 }
 ?>
