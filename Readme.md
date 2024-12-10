@@ -1,8 +1,11 @@
-# Version statique de l'application des surnoms
+# Version dynamique de l'application des surnoms
 
-L'application des surnoms des enseignants est une application exemple réalisée pour tester une technologie (language, framework, etc).
+L'application des surnoms des enseignants est une application exemple réalisée 
+pour tester une technologie (language, framework, etc).
 
-Dans ce dépôt, vous trouverez une version statique (HTML5, CSS3 et JS) de cette application qui vous permettra d'avoir des fichiers de base pour tester LA nouvelle technologie de votre choix.
+Il s'agit ici de la version PHP de cette application, réalisée dans le cadre du
+module ICT 151 à l'ETML. La version statique peut être trouvée 
+[ici](https://github.com/GregLeBarbar/application-surnoms-version-statique).
 
 ## TODO
 - [ ] Only one db instance
