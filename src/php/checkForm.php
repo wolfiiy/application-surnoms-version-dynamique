@@ -7,8 +7,10 @@
 
 require('models/Constants.php');
 require('models/Database.php');
+require_once('models/TeacherModel.php');
 
 $db = new Database();
+$teacherModel = new TeacherModel();
 
 // Check for filled forms
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -59,10 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (isset($_GET['id'])) {
             // If the id is set, update an existing teacher
             $data["id"] = $_GET['id'];
-            $db -> editTeacher($data);
+            $teacherModel -> editTeacher($data);
         } else {
             // If the get is empty, default to adding the teacher
-            $db -> insertTeacher($data);
+            $teacherModel -> insertTeacher($data);
         }
     } else {
         echo <<< HTML

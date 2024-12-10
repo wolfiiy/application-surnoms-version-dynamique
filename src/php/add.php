@@ -7,12 +7,14 @@
  *              the database.
  */
 
-require('models/Constants.php');
-require('models/Database.php');
-require('models/SectionModel.php');
+require_once('models/Constants.php');
+require_once('models/Database.php');
+require_once('models/SectionModel.php');
+require_once('models/TeacherModel.php');
 
 $db = new Database();
 $sectionModel = new SectionModel();
+$teacherModel = new TeacherModel();
 
 // Placeholder values
 $firstName = "";
@@ -24,7 +26,7 @@ $origin = "";
 if (isset($_GET['id'])) {
     $isEdit = true;
     
-    $teacher = $db -> getOneTeacher($_GET['id']);
+    $teacher = $teacherModel -> getOneTeacher($_GET['id']);
     $section = $sectionModel -> getSectionById($teacher['fkSection']);
     
     $pageTitle = "Modification";

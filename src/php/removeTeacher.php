@@ -5,7 +5,7 @@
  * Description: Removes a teacher from the database.
  */
 
-require('models/Database.php');
+require('models/TeacherModel.php');
 
 // If the 'id' variable has been set, remove the corresponding teacher.
 if (isset($_GET['id'])) {
@@ -17,8 +17,8 @@ if (isset($_GET['id'])) {
  * database class. Once removed, redirects the user to the index.
  */
 function removeTeacher(int $id) {
-    $db = new Database();
-    $db -> removeTeacher($id);
+    $teacherModel = new TeacherModel();
+    $teacherModel -> removeTeacher($id);
     header("Location: index.php");
 }
 ?>

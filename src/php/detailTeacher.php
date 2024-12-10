@@ -15,10 +15,11 @@ require('models/Database.php');
 require('models/SectionModel.php');
 $db = new Database();
 $sectionModel = new SectionModel();
+$teacherModel = new TeacherModel();
 
 // Get the requested teacher
 if (isset($_GET['id'])) {
-    $teacher = $db -> getOneTeacher($_GET['id']);
+    $teacher = $teacherModel -> getOneTeacher($_GET['id']);
     $section = $sectionModel -> getSectionById($teacher['fkSection']);
 
     // Map gender to the correct image

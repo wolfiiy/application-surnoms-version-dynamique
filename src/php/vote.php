@@ -7,12 +7,14 @@
  */
 
 require('models/Database.php');
+require_once('models/TeacherModel.php');
 $db = new Database();
+$teacherModel = new TeacherModel();
 
 if (isset($_GET['id'])) {
     // If the ID is set, then the "J'élis" link has been clicked.
     // Proceed for one teacher.
-    $teacher = $db -> getOneTeacher($_GET['id']);
+    $teacher = $teacherModel -> getOneTeacher($_GET['id']);
     $db -> vote($teacher['idTeacher']);
 
     header("Location: index.php");
