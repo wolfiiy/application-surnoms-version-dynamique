@@ -9,7 +9,7 @@ Description: Footer used to display copyright information and close the HTML
 <footer>
     <p>
         Copyright GCR, STE - ICT 151 - 2024 - 
-        <a href="https://github.com/wolfiiy/application-surnoms-version-statique">
+        <a href="https://github.com/wolfiiy/application-surnoms-version-dynamique">
             Code source
         </a>
     </p>
